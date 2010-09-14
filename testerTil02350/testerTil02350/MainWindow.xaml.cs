@@ -43,5 +43,10 @@ namespace testerTil02350
         {
             statusBar1.ItemsSource = "Fill out Properties";
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
