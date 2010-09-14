@@ -44,6 +44,7 @@
         <ScrollViewer CanContentScroll="True"   Margin="75,26,100,23" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
             <Canvas  HorizontalAlignment="Stretch" Height="800" Width="600"  Margin="0,0,0,0" Name="canvas1" VerticalAlignment="Stretch" Background="DarkGray" MinHeight="0" MaxWidth="600" MaxHeight="800">
                 <Button Canvas.Left="151" Canvas.Top="97" Content="Button" Height="23" Name="button3" Width="75" />
+                <Button Canvas.Left="90" Canvas.Top="46" Content="Button" Height="23" Name="button4" Width="75" />
             </Canvas>
         </ScrollViewer>
         <StackPanel Name="stackPanel2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Margin="0,26,0,23">
