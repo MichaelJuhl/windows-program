@@ -27,32 +27,67 @@ namespace testerTil02350
         private void button_Click(object sender, RoutedEventArgs e)
         {
             statusBar1.ItemsSource = "Place Item on Canvas";
-            
-            
-            TextBlock txt1 = new TextBlock();
-            txt1.FontSize = 14;
-            txt1.Text = "Hello World!"; 
-
-            TextBlock txt2 = new TextBlock();
-            txt1.FontSize = 14;
-            txt1.Text = "Hello World2!";
-
-            Expander exp1 = new Expander();
-
-            Rectangle rec = new Rectangle(10,10);
-            rec.Height = 100;
-            rec.Width = 200;
-            
-            
-            
-
-           canvas1.Children.Add(rec);
 
             StackPanel stack = new StackPanel();
-            stack.Children.Add(txt1);
-            stack.Children.Add(txt2);
+            StackPanel stackAtt = new StackPanel();
+            StackPanel stackMet = new StackPanel();
+
+            Label labelTop = new Label();
+            Label labelAtt = new Label();
+            Label labelMet = new Label();
+            Label labelAt1 = new Label();
+            Label labelMe1 = new Label();
+
+            Expander expAtt = new Expander();
+            Expander expMet = new Expander();
+
+            labelAt1.Content = "AttribNavn";
+            labelMe1.Content = "MetodeNavn";
+            labelTop.Content = "KlasseNavn";
+         
+            stackAtt.Children.Add(labelAt1);
+         
+            stackMet.Children.Add(labelMe1);
+
+            expAtt.Header = "Attributter";
+            expAtt.Content = stackAtt;
+
+            expMet.Header = "Metoder";
+            expMet.Content = stackMet;
+
+            stack.Children.Add(labelTop);
+            stack.Children.Add(expAtt);
+            stack.Children.Add(expMet);
+
             
-           /* canvas1.Children.Add(stack);*/
+
+            canvas1.Children.Add(stack);
+
+            /* 
+             TextBlock txt1 = new TextBlock();
+             txt1.FontSize = 14;
+             txt1.Text = "Hello World!"; 
+
+             TextBlock txt2 = new TextBlock();
+             txt1.FontSize = 14;
+             txt1.Text = "Hello World2!";
+
+             Expander exp1 = new Expander();
+
+             Rectangle rec = new Rectangle(10,10);
+             rec.Height = 100;
+             rec.Width = 200;
+            
+            
+            
+
+             canvas1.Children.Add(rec);
+
+             StackPanel stack = new StackPanel();
+             stack.Children.Add(txt1);
+             stack.Children.Add(txt2);
+            
+             canvas1.Children.Add(stack);*/
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
