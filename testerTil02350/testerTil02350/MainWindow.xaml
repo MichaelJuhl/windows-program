@@ -42,14 +42,10 @@
         </Menu>
         <StatusBar Height="23" HorizontalAlignment="Stretch" Margin="0,0,0,0" Name="statusBar1" VerticalAlignment="Bottom" />
         <ScrollViewer CanContentScroll="True"   Margin="75,26,100,23" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-<<<<<<< .mine
+
             <Canvas  HorizontalAlignment="Stretch" Height="800" Width="600"  Margin="0,0,0,0" Name="canvas1" VerticalAlignment="Stretch" Background="DarkGray" MinHeight="0" MaxWidth="600" MaxHeight="800"></Canvas>
-=======
-            <Canvas  HorizontalAlignment="Stretch" Height="800" Width="600"  Margin="0,0,0,0" Name="canvas1" VerticalAlignment="Stretch" Background="DarkGray" MinHeight="0" MaxWidth="600" MaxHeight="800">
-                <Button Canvas.Left="108" Canvas.Top="97" Content="Button" Height="23" Name="button3" Width="75" Click="button3_Click" />
-                <Label Canvas.Left="129" Canvas.Top="46" Content="Label" Height="28" Name="label1" />
-            </Canvas>
->>>>>>> .r10
+
+
         </ScrollViewer>
         <StackPanel Name="stackPanel2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Margin="0,26,0,23">
             <Label Content="Egenskaber" Height="28" Name="labelTopStackPanel2" HorizontalContentAlignment="Center" />
