@@ -27,6 +27,32 @@ namespace testerTil02350
         private void button_Click(object sender, RoutedEventArgs e)
         {
             statusBar1.ItemsSource = "Place Item on Canvas";
+            
+            
+            TextBlock txt1 = new TextBlock();
+            txt1.FontSize = 14;
+            txt1.Text = "Hello World!"; 
+
+            TextBlock txt2 = new TextBlock();
+            txt1.FontSize = 14;
+            txt1.Text = "Hello World2!";
+
+            Expander exp1 = new Expander();
+
+            Rectangle rec = new Rectangle(10,10);
+            rec.Height = 100;
+            rec.Width = 200;
+            
+            
+            
+
+           canvas1.Children.Add(rec);
+
+            StackPanel stack = new StackPanel();
+            stack.Children.Add(txt1);
+            stack.Children.Add(txt2);
+            
+           /* canvas1.Children.Add(stack);*/
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
