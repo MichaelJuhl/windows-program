@@ -28,7 +28,9 @@ namespace testerTil02350
         {
             statusBar1.ItemsSource = "Place Item on Canvas";
 
-            StackPanel stack = new StackPanel();
+            /* Placere en Stack med indhold på canvas */
+
+            StackPanel stack = new StackPanel();        
             StackPanel stackAtt = new StackPanel();
             StackPanel stackMet = new StackPanel();
 
@@ -43,51 +45,43 @@ namespace testerTil02350
 
             labelAt1.Content = "AttribNavn";
             labelMe1.Content = "MetodeNavn";
-            labelTop.Content = "KlasseNavn";
-         
-            stackAtt.Children.Add(labelAt1);
-         
-            stackMet.Children.Add(labelMe1);
+            if (textBox1.Text == "Name")
+            {
+                MessageBox.Show("Please, fill out name.");
+            }
+            else
+            {
+                labelTop.Content = textBox1.Text;
+                labelTop.FontWeight = FontWeights.Bold;
 
-            expAtt.Header = "Attributter";
-            expAtt.Content = stackAtt;
+                stackAtt.Children.Add(labelAt1);
 
-            expMet.Header = "Metoder";
-            expMet.Content = stackMet;
+                stackMet.Children.Add(labelMe1);
 
-            stack.Children.Add(labelTop);
-            stack.Children.Add(expAtt);
-            stack.Children.Add(expMet);
+                expAtt.Header = "Attributter";
+                expAtt.Content = stackAtt;
 
-            
+                expMet.Header = "Metoder";
+                expMet.Content = stackMet;
 
-            canvas1.Children.Add(stack);
+                stack.Children.Add(labelTop);
+                stack.Children.Add(expAtt);
+                stack.Children.Add(expMet);
 
-            /* 
-             TextBlock txt1 = new TextBlock();
-             txt1.FontSize = 14;
-             txt1.Text = "Hello World!"; 
+                LinearGradientBrush Gradient = new LinearGradientBrush();
+                Gradient.StartPoint = new Point(0.5, 0);
+                Gradient.EndPoint = new Point(0.5, 1);
+                Gradient.GradientStops.Add(new GradientStop(Colors.Blue, 0.0));
+                Gradient.GradientStops.Add(new GradientStop(Colors.LightBlue, 1.0));
 
-             TextBlock txt2 = new TextBlock();
-             txt1.FontSize = 14;
-             txt1.Text = "Hello World2!";
+                stack.Background = Gradient;
 
-             Expander exp1 = new Expander();
+                Canvas.SetTop(stack, 100);
+                Canvas.SetLeft(stack, 100);
 
-             Rectangle rec = new Rectangle(10,10);
-             rec.Height = 100;
-             rec.Width = 200;
-            
-            
-            
-
-             canvas1.Children.Add(rec);
-
-             StackPanel stack = new StackPanel();
-             stack.Children.Add(txt1);
-             stack.Children.Add(txt2);
-            
-             canvas1.Children.Add(stack);*/
+                canvas1.Children.Add(stack);
+                
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
