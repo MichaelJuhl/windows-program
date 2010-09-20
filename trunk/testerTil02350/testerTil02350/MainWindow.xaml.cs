@@ -62,11 +62,7 @@ namespace testerTil02350
                 MessageBox.Show("Please, fill out name.");
             }
             else
-            {
-                
-
-                
-                
+            {                
                 /*labelTop.Content = textBox1.Text;*/
 
                 labelTop.Content = kl.Name;
