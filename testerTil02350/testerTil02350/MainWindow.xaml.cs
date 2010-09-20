@@ -28,15 +28,11 @@ namespace testerTil02350
         {
             statusBar1.ItemsSource = "Place Item on Canvas";
 
-            string[] attrib = new string[3];
-            attrib[0] = "et";
-            attrib[1] = "to";
-            attrib[2] = "tre";
+            string[] attrib = new string[] {"et","to","tre" };
+            
 
-            string[] method = new string[3];
-            method[0] = "first";
-            method[1] = "second";
-            method[2] = "third";
+            string[] method = new string[3]{"first","second","third"};
+          
 
             int x = 100;
             int y = 100;
@@ -52,14 +48,15 @@ namespace testerTil02350
             Label labelTop = new Label();
             Label labelAtt = new Label();
             Label labelMet = new Label();
-            Label labelAt1 = new Label();
-            Label labelMe1 = new Label();
+            /*Label labelAt1 = new Label();
+            Label labelMe1 = new Label();*/
 
             Expander expAtt = new Expander();
             Expander expMet = new Expander();
 
-            labelAt1.Content = "AttribNavn";
-            labelMe1.Content = "MetodeNavn";
+            /*labelAt1.Content = "AttribNavn";
+            labelMe1.Content = "MetodeNavn";*/
+            
             if (textBox1.Text == "Name")
             {
                 MessageBox.Show("Please, fill out name.");
@@ -78,21 +75,35 @@ namespace testerTil02350
                 labelTop.FontWeight = FontWeights.Bold;
 
 
+                foreach (string i in attrib)
+                {
+                    Label labelAt1 = new Label();
+                    labelAt1.Content = i;
+                    stackAtt.Children.Add(labelAt1);
+                }
+
+                foreach (string i in method)
+                {
+                    Label labelMe1 = new Label();
+                    labelMe1.Content = i;
+                    stackMet.Children.Add(labelMe1);
+                }
+
                /* for (int i=0 ; i < kl.Attrib.Length ; i++)
                 {
                     labelAt1.Content = kl.Attrib[i];
                     stackAtt.Children.Add(labelAt1);
-                }
+                }*/
 
-                for (int i = 0; i < kl.Method.Length; i++)
+                /*for (int i = 0; i < kl.Method.Length; i++)
                 {
                     labelMe1.Content = kl.Method[i];
                     stackMet.Children.Add(labelMe1);
                 }*/
 
-                stackAtt.Children.Add(labelAt1);
+                /*stackAtt.Children.Add(labelAt1);
 
-                stackMet.Children.Add(labelMe1);
+                stackMet.Children.Add(labelMe1);*/
 
                 expAtt.Header = "Attributter";
                 expAtt.Content = stackAtt;
