@@ -24,11 +24,26 @@ namespace testerTil02350
             InitializeComponent();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void button_Click_Class(object sender, RoutedEventArgs e)
         {
             statusBar1.ItemsSource = "Place Item on Canvas";
 
-            /* Placere en Stack med indhold på canvas */
+            string[] attrib = new string[3];
+            attrib[0] = "et";
+            attrib[1] = "to";
+            attrib[2] = "tre";
+
+            string[] method = new string[3];
+            method[0] = "first";
+            method[1] = "second";
+            method[2] = "third";
+
+            int x = 100;
+            int y = 100;
+
+            /* Placere en Stack med indhold på canvas */  
+
+            Klasse kl = new Klasse(textBox1.Text,attrib,method,x,y);
 
             StackPanel stack = new StackPanel();        
             StackPanel stackAtt = new StackPanel();
@@ -51,8 +66,29 @@ namespace testerTil02350
             }
             else
             {
-                labelTop.Content = textBox1.Text;
+                
+
+                
+                
+                /*labelTop.Content = textBox1.Text;*/
+
+                labelTop.Content = kl.Name;
+                labelTop.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                labelTop.FontSize = 15;
                 labelTop.FontWeight = FontWeights.Bold;
+
+
+               /* for (int i=0 ; i < kl.Attrib.Length ; i++)
+                {
+                    labelAt1.Content = kl.Attrib[i];
+                    stackAtt.Children.Add(labelAt1);
+                }
+
+                for (int i = 0; i < kl.Method.Length; i++)
+                {
+                    labelMe1.Content = kl.Method[i];
+                    stackMet.Children.Add(labelMe1);
+                }*/
 
                 stackAtt.Children.Add(labelAt1);
 
@@ -76,8 +112,8 @@ namespace testerTil02350
 
                 stack.Background = Gradient;
 
-                Canvas.SetTop(stack, 100);
-                Canvas.SetLeft(stack, 100);
+                Canvas.SetTop(stack, x);
+                Canvas.SetLeft(stack, y);
 
                 canvas1.Children.Add(stack);
                 
@@ -99,7 +135,12 @@ namespace testerTil02350
             statusBar1.ItemsSource = "Fill out Properties";
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void button_Click_Arrow(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_Click_Note(object sender, RoutedEventArgs e)
         {
 
         }

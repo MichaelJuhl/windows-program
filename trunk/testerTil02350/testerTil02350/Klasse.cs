@@ -5,14 +5,14 @@ using System.Text;
 
 namespace testerTil02350
 {
-    public class Class:Object
+    public class Klasse:Object
     {
         public string[] Attrib;
         public string[] Method;
         public int Xkoor;
         public int Ykoor;
         
-        public Class(string name,string[] attrib, string[] method, int xkoor, int ykoor)
+        public Klasse(string name,string[] attrib, string[] method, int xkoor, int ykoor)
             :base(name)
         {
             Attrib = attrib;
