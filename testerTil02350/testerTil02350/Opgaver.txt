@@ -7,3 +7,5 @@ Følgende Opgaver skal laves:
 - Undo/Redo
 - Keyboard handler (shortcuts)
 - Forskellige pile (inheirets, instants, "uden pil")
+- Quick-iconer
+- Slette en klasse/objekt igen
