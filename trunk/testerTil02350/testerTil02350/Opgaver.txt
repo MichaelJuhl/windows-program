@@ -1,0 +1,9 @@
+﻿
+Følgende Opgaver skal laves:
+
+- Stylesheet
+- Egenskaber
+- Exeptionhandler
+- Undo/Redo
+- Keyboard handler (shortcuts)
+- Forskellige pile (inheirets, instants, "uden pil")
