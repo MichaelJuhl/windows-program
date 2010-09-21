@@ -5,7 +5,7 @@ using System.Text;
 
 namespace testerTil02350
 {
-    public class Klasse:Object
+    public class Klasse:Objekt
     {
         public string[] Attrib;
         public string[] Method;
