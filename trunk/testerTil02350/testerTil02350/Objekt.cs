@@ -5,7 +5,7 @@ using System.Text;
 
 namespace testerTil02350
 {
-    public abstract class Objekt
+    public class Objekt
     {
         public string Name;
     

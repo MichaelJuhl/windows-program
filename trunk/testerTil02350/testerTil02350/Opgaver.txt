@@ -9,3 +9,13 @@ Følgende Opgaver skal laves:
 - Forskellige pile (inheirets, instants, "uden pil")
 - Quick-iconer
 - Slette en klasse/objekt igen
+- Forskellige objekter på canvas:
+		+ Klasse
+		+ Pile (forskellige):
+				/ Almindelig
+				/ Åben (arver)
+				/ Ingen
+		+ Note
+- Animation (knap bliver til objekt på canves)
+- Få objekt til at hæve sig
+- Tegnforklaring (public, private, abstract)
