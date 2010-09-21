@@ -31,7 +31,7 @@ namespace testerTil02350
             string[] attrib = new string[] {"et","to","tre" };
             
 
-            string[] method = new string[3]{"first","second","third"};
+            string[] method = new string[]{"first","second","third"};
           
 
             int x = 100;
