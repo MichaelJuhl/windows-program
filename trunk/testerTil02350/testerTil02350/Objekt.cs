@@ -5,11 +5,11 @@ using System.Text;
 
 namespace testerTil02350
 {
-    public abstract class Object
+    public abstract class Objekt
     {
         public string Name;
     
-        public Object(string name)
+        public Objekt(string name)
         {
             Name = name;
         }
