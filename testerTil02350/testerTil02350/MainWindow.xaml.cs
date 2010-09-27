@@ -22,6 +22,27 @@ namespace testerTil02350
         public MainWindow()
         {
             InitializeComponent();
+
+            this.PreviewMouseRightButtonDown += Window1_PreviewMouseRightButtonDown;
+            this.btnOnlyShowOffsetIndicators.Checked += btnOnlyShowOffsetIndicators_Checked;
+            this.btnOnlyShowOffsetIndicators.Unchecked += btnOnlyShowOffsetIndicators_Unchecked;
+
+            // Add the blocks which display their positions within the Canvas.
+           /* foreach (string key in new string[] { 
+													"buttonTopLeft", 
+													"buttonTopRight", 
+													"buttonBottomRight", 
+													"buttonBottomLeft", 
+													"buttonAll", 
+													"buttonNone" 
+												})
+            {
+                Button button = this.FindResource(key) as Button;
+                this.canvas1.Children.Add(button);
+            }*/
+
+            this.ResetZOrder();	
+
         }
 
 
@@ -68,36 +89,38 @@ namespace testerTil02350
 
         private void surface_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Get the mouse position from the event-arguments.
-            Point point = e.GetPosition(canvas1);
+             // Get the mouse position from the event-arguments.
+                    Point point = e.GetPosition(canvas1);
 
-            // Perform a hit-test for the above point relative to the canvas.
-            HitTestResult result = VisualTreeHelper.HitTest(canvas1, point);
+              /*      // Perform a hit-test for the above point relative to the canvas.
+                //  HitTestResult result = VisualTreeHelper.HitTest(canvas1, point);
 
            
             
-            // Check if we:
-            //  - Pressed the left mouse button
-            //  - If we pressed on top of an object
-            //  - ...and if that object happens to NOT be the canvas.
-            if (e.LeftButton == MouseButtonState.Pressed && result != null && result.VisualHit != canvas1)
-            {
-                // Get the element we "hit"...
-                _draggedElement = (UIElement)result.VisualHit;
+                  // Check if we:
+                  //  - Pressed the left mouse button
+                  //  - If we pressed on top of an object
+                  //  - ...and if that object happens to NOT be the canvas.
+                if (e.LeftButton == MouseButtonState.Pressed && result != null && result.VisualHit != canvas1)
+                  {
+                      // Get the element we "hit"...
+                      _draggedElement = (UIElement)result.VisualHit;
 
-                // ...and register its original position
-                _originalElementPos = new Point()
-                {
-                    X = Canvas.GetLeft(_draggedElement),
-                    Y = Canvas.GetTop(_draggedElement)
-                };
+                      // ...and register its original position
+                      _originalElementPos = new Point()
+                      {
+                          X = Canvas.GetLeft(_draggedElement),
+                          Y = Canvas.GetTop(_draggedElement)
+                      };
 
-                // ...as well as the start of the drag
-                _dragStart = point;
-            }
-           
+                      // ...as well as the start of the drag
+                      _dragStart = point;
+                  }
+                 */
             // If we pressed the right mouse button then...
-            else if (e.RightButton == MouseButtonState.Pressed && radioButton1.IsChecked == true)
+            //else 
+            if (e.LeftButton == MouseButtonState.Pressed && radioButton1.IsChecked == true)
+      
             {
 /*
                 // Create the object
@@ -171,6 +194,9 @@ namespace testerTil02350
                 expMet.Header = "Metoder";
                 expMet.Content = stackMet;
 
+                expAtt.IsExpanded = true;
+                expMet.IsExpanded = true;
+
                 stack.Children.Add(labelTop);
                 stack.Children.Add(expAtt);
                 stack.Children.Add(expMet);
@@ -188,6 +214,8 @@ namespace testerTil02350
                 Canvas.SetTop(stack, point.Y);
                 Canvas.SetLeft(stack, point.X);
 
+                //Canvas.SetTop(stack, 100);
+                //Canvas.SetLeft(stack, 100);
               
 
             }
@@ -222,11 +250,91 @@ namespace testerTil02350
                 Canvas.SetLeft(_draggedElement, newpos.X);
                 Canvas.SetTop(_draggedElement, newpos.Y);
             }
-        }        
+        }
+
+     
     
     
-    
-    
+        
+        private UIElement elementForContextMenu;
+
+        void OnMenuItemClick(object sender, RoutedEventArgs e)
+        {
+            if (this.elementForContextMenu == null)
+                return;
+
+            if (e.Source == this.menuItemBringToFront ||
+                e.Source == this.menuItemSendToBack)
+            {
+                bool bringToFront = e.Source == this.menuItemBringToFront;
+
+                if (bringToFront)      
+                    this.canvas1.BringToFront(this.elementForContextMenu);
+                else
+                    this.canvas1.SendToBack(this.elementForContextMenu);
+            }
+            else
+            {
+                bool canBeDragged = WPF.JoshSmith.Controls.DragCanvas.GetCanBeDragged(this.elementForContextMenu);
+                WPF.JoshSmith.Controls.DragCanvas.SetCanBeDragged(this.elementForContextMenu, !canBeDragged);
+                (e.Source as MenuItem).IsChecked = !canBeDragged;
+            }
+        }
+
+        void OnContextMenuOpened(object sender, RoutedEventArgs e)
+        {
+            if (this.elementForContextMenu != null)
+                this.menuItemCanBeDragged.IsChecked = WPF.JoshSmith.Controls.DragCanvas.GetCanBeDragged(this.elementForContextMenu);
+        }
+
+        private void ResetZOrder()
+        {
+            // Set the z-index of every visible child in the Canvas.
+            int index = 0;
+            for (int i = 0; i < this.canvas1.Children.Count; ++i)
+                if (this.canvas1.Children[i].Visibility == Visibility.Visible)
+                    Canvas.SetZIndex(this.canvas1.Children[i], index++);
+        }
+
+        void Window1_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // If the user right-clicks while dragging an element, assume that they want 
+            // to manipulate the z-index of the element being dragged (even if it is  
+            // behind another element at the time).
+            if (this.canvas1.ElementBeingDragged != null)
+                this.elementForContextMenu = this.canvas1.ElementBeingDragged;
+            else
+                this.elementForContextMenu =
+                    this.canvas1.FindCanvasChild(e.Source as DependencyObject);
+        }
+
+        private void OnButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Thank you for clicking today, your clicks are important to us.");
+        }
+
+        void btnOnlyShowOffsetIndicators_Unchecked(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement child in this.canvas1.Children)
+                child.Visibility = Visibility.Visible;
+
+            this.ResetZOrder();
+        }
+
+        void btnOnlyShowOffsetIndicators_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement child in this.canvas1.Children)
+            {
+                child.Visibility =
+                    child is Button && (child as Button).Content == null ?
+                    Visibility.Visible :
+                    Visibility.Collapsed;
+            }
+
+            this.ResetZOrder();
+        }
+
+
     
     
     
