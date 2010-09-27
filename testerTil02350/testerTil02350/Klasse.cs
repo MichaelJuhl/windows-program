@@ -9,10 +9,10 @@ namespace testerTil02350
     {
         public string[] Attrib;
         public string[] Method;
-        public int Xkoor;
-        public int Ykoor;
+        public double Xkoor;
+        public double Ykoor;
         
-        public Klasse(string name,string[] attrib, string[] method, int xkoor, int ykoor)
+        public Klasse(string name,string[] attrib, string[] method, double xkoor, double ykoor)
             :base(name)
         {
             Attrib = attrib;
