@@ -91,55 +91,11 @@ namespace testerTil02350
         {
              // Get the mouse position from the event-arguments.
                     Point point = e.GetPosition(canvas1);
-
-              /*      // Perform a hit-test for the above point relative to the canvas.
-                //  HitTestResult result = VisualTreeHelper.HitTest(canvas1, point);
-
-           
-            
-                  // Check if we:
-                  //  - Pressed the left mouse button
-                  //  - If we pressed on top of an object
-                  //  - ...and if that object happens to NOT be the canvas.
-                if (e.LeftButton == MouseButtonState.Pressed && result != null && result.VisualHit != canvas1)
-                  {
-                      // Get the element we "hit"...
-                      _draggedElement = (UIElement)result.VisualHit;
-
-                      // ...and register its original position
-                      _originalElementPos = new Point()
-                      {
-                          X = Canvas.GetLeft(_draggedElement),
-                          Y = Canvas.GetTop(_draggedElement)
-                      };
-
-                      // ...as well as the start of the drag
-                      _dragStart = point;
-                  }
-                 */
-            // If we pressed the right mouse button then...
-            //else 
+  
+            //Check if left mousebutton is pressed + radiobutton (class) is pressed
             if (e.LeftButton == MouseButtonState.Pressed && radioButton1.IsChecked == true)
-      
             {
-/*
-                // Create the object
-                Rectangle obj = new Rectangle()
-                {
-                    Width = 100,
-                    Height = 100,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 2,
-                    Fill = Brushes.CornflowerBlue
-                };
 
-                // ...add it to the canvas
-                canvas1.Children.Add(obj);
-
-                // ...and position it where the click was registered.
-                Canvas.SetLeft(obj, point.X);
-                Canvas.SetTop(obj, point.Y);
-                */
                 string[] attrib = new string[] { "et", "to", "tre" };
 
                 string[] method = new string[] { "first", "second", "third" };
@@ -156,17 +112,9 @@ namespace testerTil02350
                 Label labelTop = new Label();
                 Label labelAtt = new Label();
                 Label labelMet = new Label();
-                //Label labelAt1 = new Label();
-                //Label labelMe1 = new Label();
 
                 Expander expAtt = new Expander();
                 Expander expMet = new Expander();
-
-                //labelAt1.Content = "AttribNavn";
-                //labelMe1.Content = "MetodeNavn";
-            
-                              
-                    //labelTop.Content = textBox1.Text;
 
                     labelTop.Content = kl.Name;
                     labelTop.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
@@ -212,11 +160,7 @@ namespace testerTil02350
                 canvas1.Children.Add(stack);
                 
                 Canvas.SetTop(stack, point.Y);
-                Canvas.SetLeft(stack, point.X);
-
-                //Canvas.SetTop(stack, 100);
-                //Canvas.SetLeft(stack, 100);
-              
+                Canvas.SetLeft(stack, point.X);        
 
             }
         }
@@ -280,7 +224,7 @@ namespace testerTil02350
                 (e.Source as MenuItem).IsChecked = !canBeDragged;
             }
         }
-
+        
         void OnContextMenuOpened(object sender, RoutedEventArgs e)
         {
             if (this.elementForContextMenu != null)
