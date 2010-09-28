@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:y="clr-namespace:WPF.JoshSmith.Controls"  
-        Title="02350 - Windowsprograming Using C# and .NET" Height="350" Width="525">
+        Title="02350 - Windowsprograming Using C# and .NET" Height="477" Width="561">
     <Grid>
         <StackPanel  HorizontalAlignment="Left" Margin="0,26,0,23" Name="stackPanel1" VerticalAlignment="Stretch" Width="75" >
             <Label Content="Vælg og klik" Height="28" Name="labelTopStackPanel1" HorizontalContentAlignment="Center" />
@@ -54,18 +54,36 @@
         </ScrollViewer>
         <StackPanel Name="stackPanel2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Margin="0,26,0,23">
             <Label Content="Egenskaber" Height="28" Name="labelTopStackPanel2" HorizontalContentAlignment="Center" />
-            <ToolBar Height="26" Name="toolBar1" Width="200">
+           
+            <ToolBar Visibility="Collapsed" Height="26" Name="toolBar1" Width="200">
                     <ToggleButton Name="btnAllowDragging" IsChecked="True" Content="Allow Dragging" Margin="0,0" />
             </ToolBar>
-            
-            <ToolBar Height="26" Name="toolBar2" Width="200">
+
+            <ToolBar Visibility="Collapsed" Height="26" Name="toolBar2" Width="200">
             <ToggleButton Name="btnAllowDragOutOfView" Content="Allow Drag Out Of View" Margin="0,0" />
             </ToolBar>
-            
-            <ToolBar Height="26" Name="toolBar3" Width="200">
+
+            <ToolBar Visibility="Collapsed" Height="26" Name="toolBar3" Width="200">
                 <ToggleButton Name="btnOnlyShowOffsetIndicators" Content="Only Show Offset Indicators" Margin="0,0" />      
             </ToolBar>
-            
+            <Label Content="Attributes" Height="28" Name="label1" />
+            <TextBox Height="23" Name="textBox1" Width="120" />
+            <RadioButton Content="Private" Height="16" Name="radioButton5" IsThreeState="True" />
+            <RadioButton Content="Public" Height="16" Name="radioButton6" IsThreeState="True" />
+            <RadioButton Content="Abstract" Height="16" Name="radioButton7" IsThreeState="True" />
+            <Grid Height="25" Name="grid1" Width="101">
+                <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="0,1,0,0" Name="button4" VerticalAlignment="Top" Width="45" />
+                <Button Content="Delete..." Height="22" HorizontalAlignment="Left" Margin="45,2,0,0" Name="button5" VerticalAlignment="Top" Width="55" />
+            </Grid>
+            <Label Content="Methods" Height="28" Name="label2" />
+            <TextBox Height="23" Name="textBox2" Width="120" />
+            <RadioButton Content="Private" Height="16" Name="radioButton8" />
+            <RadioButton Content="Public" Height="16" Name="radioButton9" />
+            <RadioButton Content="Abstract" Height="16" Name="radioButton10" />
+            <Grid Height="25" Name="grid2" Width="101">
+                <Button Content="Add" Height="23" HorizontalAlignment="Left" Margin="0,1,0,0" Name="button6" VerticalAlignment="Top" Width="45" />
+                <Button Content="Delete..." Height="22" HorizontalAlignment="Left" Margin="45,2,0,0" Name="button7" VerticalAlignment="Top" Width="55" />
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>
