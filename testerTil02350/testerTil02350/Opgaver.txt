@@ -11,6 +11,9 @@ Følgende Opgaver skal laves:
 - Slette en klasse/objekt igen
 - Forskellige objekter på canvas:
 		+ Klasse
+				/ Metoder & attributer
+					- Private, public & abstract
+					- Type
 		+ Pile (forskellige):
 				/ Almindelig
 				/ Åben (arver)
