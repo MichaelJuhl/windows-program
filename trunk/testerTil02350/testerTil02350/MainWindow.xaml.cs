@@ -84,6 +84,7 @@ namespace testerTil02350
         
 
 
+      
 
 
 
@@ -92,6 +93,11 @@ namespace testerTil02350
              // Get the mouse position from the event-arguments.
                     Point point = e.GetPosition(canvas1);
   
+        /*    if (e.LeftButton == MouseButtonState.Pressed && radioButton4.IsChecked == true)
+            {
+                ?????
+            }*/
+
             //Check if left mousebutton is pressed + radiobutton (class) is pressed
             if (e.LeftButton == MouseButtonState.Pressed && radioButton1.IsChecked == true)
             {
@@ -163,6 +169,7 @@ namespace testerTil02350
                 Canvas.SetLeft(stack, point.X);        
 
             }
+            
         }
 
         private void surface_MouseUp(object sender, MouseButtonEventArgs e)
@@ -276,27 +283,6 @@ namespace testerTil02350
             }
 
             this.ResetZOrder();
-        }
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        }   
     }
 }

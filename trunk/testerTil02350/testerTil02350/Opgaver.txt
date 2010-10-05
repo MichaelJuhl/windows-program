@@ -22,3 +22,4 @@ Følgende Opgaver skal laves:
 - Animation (knap bliver til objekt på canves)
 - Få objekt til at hæve sig
 - Tegnforklaring (public, private, abstract)
+- 
