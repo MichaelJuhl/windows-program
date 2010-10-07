@@ -14,11 +14,15 @@ using System.Windows.Shapes;
 
 namespace testerTil02350
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        // The selected element (i.e. the element being dragged.)
+        private UIElement _draggedElement;
+
+        // The original position of the element and the position where the (mouse-) drag started.
+        private Point _originalElementPos, _dragStart;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,26 +30,9 @@ namespace testerTil02350
             this.PreviewMouseRightButtonDown += Window1_PreviewMouseRightButtonDown;
             this.btnOnlyShowOffsetIndicators.Checked += btnOnlyShowOffsetIndicators_Checked;
             this.btnOnlyShowOffsetIndicators.Unchecked += btnOnlyShowOffsetIndicators_Unchecked;
-
-            // Add the blocks which display their positions within the Canvas.
-           /* foreach (string key in new string[] { 
-													"buttonTopLeft", 
-													"buttonTopRight", 
-													"buttonBottomRight", 
-													"buttonBottomLeft", 
-													"buttonAll", 
-													"buttonNone" 
-												})
-            {
-                Button button = this.FindResource(key) as Button;
-                this.canvas1.Children.Add(button);
-            }*/
-
             this.ResetZOrder();	
 
         }
-
-
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -62,52 +49,22 @@ namespace testerTil02350
             statusBar1.ItemsSource = "Fill out Properties";
         }
 
-        private void button_Click_Arrow(object sender, RoutedEventArgs e)
+        private void test(object sender, MouseButtonEventArgs e)
         {
 
         }
-
-        private void button_Click_Note(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
-
-
-        // The selected element (i.e. the element being dragged.)
-        private UIElement _draggedElement;
-
-        // The original position of the element and the position where the (mouse-) drag started.
-        private Point _originalElementPos, _dragStart;
-        
-
-
-      
-
-
 
         private void surface_MouseDown(object sender, MouseButtonEventArgs e)
         {
-             // Get the mouse position from the event-arguments.
-                    Point point = e.GetPosition(canvas1);
-  
-        /*    if (e.LeftButton == MouseButtonState.Pressed && radioButton4.IsChecked == true)
-            {
-                ?????
-            }*/
+            // Get the mouse position from the event-arguments.
+            Point point = e.GetPosition(canvas1);
 
             //Check if left mousebutton is pressed + radiobutton (class) is pressed
             if (e.LeftButton == MouseButtonState.Pressed && radioButton1.IsChecked == true)
             {
-
                 string[] attrib = new string[] { "et", "to", "tre" };
-
                 string[] method = new string[] { "first", "second", "third" };
-
-                string name;
-                name ="name";
+                string name= "name";
 
                 Klasse kl = new Klasse(name, attrib, method, point.X, point.Y);
 
@@ -165,9 +122,8 @@ namespace testerTil02350
 
                 canvas1.Children.Add(stack);
                 
-                Canvas.SetTop(stack, point.Y);
-                Canvas.SetLeft(stack, point.X);        
-
+                Canvas.SetTop(stack, kl.Ykoor);
+                Canvas.SetLeft(stack, kl.Xkoor);        
             }
             
         }
@@ -175,6 +131,12 @@ namespace testerTil02350
         private void surface_MouseUp(object sender, MouseButtonEventArgs e)
         {
             _draggedElement = null;
+
+            if (radioButton4.IsChecked == true)
+            {
+                stackPanel2.Visibility = System.Windows.Visibility.Visible;           
+            }
+            
         }
 
         private void surface_MouseLeave(object sender, MouseEventArgs e)
@@ -230,6 +192,9 @@ namespace testerTil02350
                 WPF.JoshSmith.Controls.DragCanvas.SetCanBeDragged(this.elementForContextMenu, !canBeDragged);
                 (e.Source as MenuItem).IsChecked = !canBeDragged;
             }
+
+       
+
         }
         
         void OnContextMenuOpened(object sender, RoutedEventArgs e)

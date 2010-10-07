@@ -4,7 +4,7 @@
         xmlns:y="clr-namespace:WPF.JoshSmith.Controls"  
         Title="02350 - Windowsprograming Using C# and .NET" Height="477" Width="561">
     <Grid>
-        <StackPanel  HorizontalAlignment="Left" Margin="0,26,0,23" Name="stackPanel1" VerticalAlignment="Stretch" Width="75" >
+        <StackPanel HorizontalAlignment="Left" Margin="0,26,0,23" Name="stackPanel1" VerticalAlignment="Stretch" Width="75" >
             <Label Content="Vælg og klik" Height="28" Name="labelTopStackPanel1" HorizontalContentAlignment="Center" />
             <Button Content="Class" Height="23" Name="button1" Width="75" />
             <Button Content="Arrow" Height="23" Name="button2" Width="75" />
@@ -52,7 +52,7 @@
 
 
         </ScrollViewer>
-        <StackPanel Name="stackPanel2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Margin="0,26,0,23">
+        <StackPanel Name="stackPanel2" HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="100" Margin="0,26,0,23" Visibility="Hidden">
             <Label Content="Egenskaber" Height="28" Name="labelTopStackPanel2" HorizontalContentAlignment="Center" />
            
             <ToolBar Visibility="Collapsed" Height="26" Name="toolBar1" Width="200">
