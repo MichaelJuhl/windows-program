@@ -18,5 +18,11 @@
         <Button Canvas.Left="15" Canvas.Top="73" Height="23" Name="btnNewLink" Width="75" Click="btnNewLink_Click">New link</Button>
         <Button Canvas.Left="15" Canvas.Top="44" Height="23" Name="btnNewUser" Width="75" Click="btnNewUser_Click">New user</Button>
         <Button Canvas.Left="15" Canvas.Top="102" Height="23" Name="btnMove" Width="75" Click="btnMove_Click">Move</Button>
+        <Button Canvas.Left="15" Canvas.Top="131" Height="23" Name="btnNoArrow" Width="75" Click="btnNoArrow_Click">No Arrow</Button>
+        <Button Canvas.Left="15" Canvas.Top="160" Height="23" Name="btnOpenArrow" Width="75" Click="btnOpenArrow_Click">Open Arrow</Button>
+        <Button Canvas.Left="15" Canvas.Top="189" Height="23" Name="btnClosedArrow" Width="75" Click="btnClosedArrow_Click">Closed Arrow</Button>
+        <Button Canvas.Left="15" Canvas.Top="218" Height="23" Name="btnStartArrow" Width="75" Click="btnStartArrow_Click">Start Arrow</Button>
+        <Button Canvas.Left="15" Canvas.Top="247" Height="23" Name="btnEndArrow" Width="75" Click="btnEndArrow_Click">End Arrow</Button>
+        <Button Canvas.Left="15" Canvas.Top="276" Height="23" Name="btnBothArrow" Width="75" Click="btnBothArrow_Click">Double Arrow</Button>
     </Canvas>
 </Window>

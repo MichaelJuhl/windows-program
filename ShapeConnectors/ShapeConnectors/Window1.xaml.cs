@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -18,7 +19,11 @@ namespace ShapeConnectors
         // variable to hold the thumb drawing started from
         MyThumb linkedThumb;
         // Line drawn by the mouse before connection established
-        LineGeometry link;
+        ArrowLine link;
+        ArrowLine aline1 = new ArrowLine();
+        bool closedArrow = false;
+        int arrowType = 2;
+
 
         public Window1()
         {
@@ -27,6 +32,19 @@ namespace ShapeConnectors
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            aline1.Stroke = Brushes.Black;
+            aline1.StrokeThickness = 1;
+            aline1.X1 = 100;
+            aline1.Y1 = 100;
+            aline1.X2 = 200;
+            aline1.Y2 = 200;
+            aline1.ArrowEnds = (ArrowEnds) 3;
+            aline1.IsArrowClosed = false;
+
+            
+            //myCanvas.Children.Add(myThumb1.LinkTo(myThumb2));
+            //connectors.Children.Add(aline1);
             // Setup connections for predefined thumbs            
        /*     connectors.Children.Add(myThumb1.LinkTo(myThumb2));
             connectors.Children.Add(myThumb2.LinkTo(myThumb3));
@@ -39,6 +57,8 @@ namespace ShapeConnectors
             
 
             this.Title = "Links established: " + connectors.Children.Count.ToString();
+            btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = btnNoArrow.IsEnabled = btnStartArrow.IsEnabled = btnBothArrow.IsEnabled = btnEndArrow.IsEnabled = false;
+
         }
 
         // Event hanlder for dragging functionality support
@@ -61,7 +81,8 @@ namespace ShapeConnectors
         void Window1_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
-            if (btnNewUser.IsMouseOver || btnNewLink.IsMouseOver || btnNewAction.IsMouseOver || btnMove.IsMouseOver)
+            if (btnNewUser.IsMouseOver || btnNewLink.IsMouseOver || btnNewAction.IsMouseOver || btnMove.IsMouseOver || btnNoArrow.IsMouseOver ||
+                btnOpenArrow.IsMouseOver || btnClosedArrow.IsMouseOver || btnStartArrow.IsMouseOver || btnBothArrow.IsMouseOver || btnEndArrow.IsMouseOver)
             {
                 isAddNewLink = isAddNewUser = isAddNewAction = false;
 
@@ -115,11 +136,21 @@ namespace ShapeConnectors
             {                
                 if (!isLinkStarted)
                 {
-                    if (link == null || link.EndPoint != link.StartPoint)
+                    if (link == null || (link.X1 != link.X2 || link.Y1 != link.Y2))
                     {
                         Point position = e.GetPosition(this);
-                        link = new LineGeometry(position, position);
-                        connectors.Children.Add(link);
+                        link = new ArrowLine();
+                        link.X1 = position.X;
+                        link.Y1 = position.Y;
+                        link.X2 = position.X;
+                        link.Y2 = position.Y;
+                        
+                        myCanvas.Children.Add(link);
+                        link.Stroke = Brushes.Black;
+                        link.StrokeThickness = 1;
+                        link.IsArrowClosed = closedArrow;
+                        link.ArrowEnds = (ArrowEnds)arrowType;
+
                         isLinkStarted = true;
                         linkedThumb = e.Source as MyThumb;
                         e.Handled = true;
@@ -134,7 +165,9 @@ namespace ShapeConnectors
             if (isAddNewLink && isLinkStarted)
             {
                 // Set the new link end point to current mouse position
-                link.EndPoint = e.GetPosition(this);
+                link.X2 = e.GetPosition(this).X;
+                link.Y2 = e.GetPosition(this).Y;
+                
                 e.Handled = true;
             }
         }
@@ -148,16 +181,20 @@ namespace ShapeConnectors
                 // declare the linking state
                 bool linked = false;
                 // We released the button on MyThumb object
+
                 if (e.Source.GetType() == typeof(MyThumb))
                 {
                     MyThumb targetThumb = e.Source as MyThumb;
                     // define the final endpoint of line
-                    link.EndPoint = e.GetPosition(this);
+                    link.X2 = e.GetPosition(this).X;
+                    link.Y2 = e.GetPosition(this).Y;
                     // if any line was drawn (avoid just clicking on the thumb)
-                    if (link.EndPoint != link.StartPoint && linkedThumb != targetThumb)
+
+                    if ((link.X1 != link.X2 || link.Y1 != link.Y2) && linkedThumb != targetThumb)
                     {
+
                         // establish connection
-                        linkedThumb.LinkTo(targetThumb, link);
+                        linkedThumb.LinkTo(targetThumb, link,closedArrow,arrowType);
                         // set linked state to true
                         linked = true;
                     }
@@ -167,7 +204,7 @@ namespace ShapeConnectors
                 if (!linked)
                 {
                     // remove line from the canvas
-                    connectors.Children.Remove(link);
+                    myCanvas.Children.Remove(link);
                     // clear the link variable
                     link = null;
                 }
@@ -181,13 +218,13 @@ namespace ShapeConnectors
             }
             this.Title = "Links established: " + connectors.Children.Count.ToString();
         }
-        
         // Event handler for enabling new thumb creation by left mouse button click
         private void btnNewAction_Click(object sender, RoutedEventArgs e)
         {            
             isAddNewAction = true;
             isAddNewLink = false;
             Mouse.OverrideCursor = Cursors.SizeAll;
+            btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = btnNoArrow.IsEnabled = btnEndArrow.IsEnabled = btnBothArrow.IsEnabled = btnStartArrow.IsEnabled = false;
             //btnNewAction.IsEnabled = btnNewLink.IsEnabled = false;
         }
         private void btnNewUser_Click(object sender, RoutedEventArgs e)
@@ -195,6 +232,7 @@ namespace ShapeConnectors
             isAddNewUser = true;
             isAddNewLink = false;
             Mouse.OverrideCursor = Cursors.SizeAll;
+            btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = btnNoArrow.IsEnabled = btnEndArrow.IsEnabled = btnBothArrow.IsEnabled = btnStartArrow.IsEnabled = false;
            // btnNewUser.IsEnabled = btnNewLink.IsEnabled = false;
         }
         private void btnMove_Click(object sender, RoutedEventArgs e)
@@ -204,8 +242,62 @@ namespace ShapeConnectors
             isAddNewLink = false;
             Mouse.OverrideCursor = Cursors.SizeAll;
             // btnNewUser.IsEnabled = btnNewLink.IsEnabled = false;
+            btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = btnNoArrow.IsEnabled = btnEndArrow.IsEnabled = btnBothArrow.IsEnabled = btnStartArrow.IsEnabled = false;
         }
 
+        private void btnNoArrow_Click(object sender, RoutedEventArgs e)
+        {
+            arrowType = 0;
+            isAddNewLink = true;
+            btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = true;
+            btnNoArrow.IsEnabled = false;
+
+        }
+
+        private void btnOpenArrow_Click(object sender, RoutedEventArgs e)
+        {
+
+            closedArrow = false;
+            isAddNewLink = true;
+            btnClosedArrow.IsEnabled = btnNoArrow.IsEnabled = true;
+            btnOpenArrow.IsEnabled = false;
+        }
+
+        private void btnClosedArrow_Click(object sender, RoutedEventArgs e)
+        {
+
+            closedArrow = true;
+            isAddNewLink = true;
+            btnNoArrow.IsEnabled = btnOpenArrow.IsEnabled = true;
+            btnClosedArrow.IsEnabled = false;
+        }
+
+        private void btnStartArrow_Click(object sender, RoutedEventArgs e)
+        {
+            arrowType = 1;
+            isAddNewLink = true;
+            btnEndArrow.IsEnabled = btnBothArrow.IsEnabled = true;
+            btnStartArrow.IsEnabled = false;
+
+        }
+
+        private void btnEndArrow_Click(object sender, RoutedEventArgs e)
+        {
+            arrowType = 2;
+            isAddNewLink = true;
+            btnStartArrow.IsEnabled = btnBothArrow.IsEnabled = true;
+            btnEndArrow.IsEnabled = false;
+
+        }
+
+        private void btnBothArrow_Click(object sender, RoutedEventArgs e)
+        {
+            arrowType = 3;
+            isAddNewLink = true;
+            btnEndArrow.IsEnabled = btnStartArrow.IsEnabled = true;
+            btnBothArrow.IsEnabled = false;
+
+        }
 
         private void btnNewLink_Click(object sender, RoutedEventArgs e)
         {
@@ -216,6 +308,37 @@ namespace ShapeConnectors
             else
             {
                 isAddNewLink = true;
+
+                if (closedArrow)
+                {
+                    btnNoArrow.IsEnabled = btnOpenArrow.IsEnabled = true;
+                    btnClosedArrow.IsEnabled = false;
+                }
+                else
+                {
+                    btnNoArrow.IsEnabled = btnClosedArrow.IsEnabled = true;
+                    btnOpenArrow.IsEnabled = false;
+                }
+                if (arrowType == 0)
+                {
+                    btnClosedArrow.IsEnabled = btnOpenArrow.IsEnabled = true;
+                    btnNoArrow.IsEnabled = false;
+                }
+                if (arrowType == 1)
+                {
+                    btnEndArrow.IsEnabled = btnBothArrow.IsEnabled = true;
+                    btnStartArrow.IsEnabled = false;
+                }
+                if (arrowType == 2)
+                {
+                    btnStartArrow.IsEnabled = btnBothArrow.IsEnabled = true;
+                    btnEndArrow.IsEnabled = false;
+                }
+                if (arrowType == 3)
+                {
+                    btnEndArrow.IsEnabled = btnStartArrow.IsEnabled = true;
+                    btnBothArrow.IsEnabled = false;
+                }
             }
             Mouse.OverrideCursor = Cursors.Cross;
           //  btnNewAction.IsEnabled = btnNewLink.IsEnabled = false;
